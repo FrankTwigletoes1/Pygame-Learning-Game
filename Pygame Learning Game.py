@@ -22,9 +22,52 @@ class Background(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
         
-class Menu():
-    def __init__(self):
-        print("Menu")
+ 
+class Button:
+    def __init__(self, rect, command, **kwargs):
+        self.process_kwargs(kwargs)
+        self.rect = pg.Rect(rect)
+        self.image = pg.Surface(self.rect.size).convert()
+        self.function = command
+        self.text = self.font.render(self.text,True,self.font_color)
+        self.text_rect = self.text.get_rect(center=self.rect.center)
+         
+    def process_kwargs(self, kwargs):
+        settings = {
+            'color'         :pg.Color('red'),
+            'text'          :'default',
+            'font'          :pg.font.SysFont('Arial', 16),
+            'hover_color'   :(200,0,0),
+            'font_color'    :pg.Color('white'),
+        }
+        for kwarg in kwargs:
+            if kwarg in settings:
+                settings[kwarg] = kwargs[kwarg]
+            else:
+                raise AttributeError("{} has no keyword: {}".format(self.__class__.__name__, kwarg))
+        self.__dict__.update(settings)
+ 
+    def get_event(self):
+        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
+            self.on_click()
+ 
+    def on_click(self):
+        if self.is_hovering():
+            self.function()
+             
+    def is_hovering(self):
+        if self.rect.collidepoint(pg.mouse.get_pos()):
+            return True
+ 
+    def draw(self, surf):
+        if self.is_hovering():
+            self.image.fill(self.hover_color)
+        else:
+            self.image.fill(self.color)
+        surf.blit(self.image, self.rect)
+        surf.blit(self.text, self.text_rect)
+    
+        
 
 
 class Player():
@@ -94,12 +137,12 @@ def main():
             
             if event.type == pygame.QUIT: 
                 pygame.quit()
-                sys.exit()
+                quit()
 
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-                    sys.exit()
+                    quit()
 
         pygame.display.update()
     
