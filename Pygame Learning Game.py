@@ -69,7 +69,6 @@ class Button:
     
         
 
-
 class Player():
     def __init__(self, x_pos, y_pos, w, h):
         self.x = x_pos
@@ -80,11 +79,11 @@ class Player():
     
     def move(self, direction, steps):
         if direction == right:
-            print("right")
+            print("right", self.x," ", self.y)
             self.x += 10
 
         elif direction == up:
-            print("up")
+            print("up",self.x ," ", self.y)
             self.y += 10
 
 #Classes slut
@@ -113,7 +112,10 @@ def triangel(Xspacer_1, Xspacer_2):
         pygame.draw.rect(screen,red,((screenwidth/2+Xspacer_1-40),460, 40, 40))
     else:
         pygame.draw.rect(screen,red,((screenwidth/2+Xspacer_1),460, 40, 40))
-    
+   
+def print():
+    x += 1
+    print("text", x)
 
 def main():
     global Background
@@ -122,14 +124,21 @@ def main():
     global screenheight
     global green
     global red
+    
+    btn_settings = {
+    'text':'Try me bitch',
+    'color':pygame.Color('grey'),
+    'font_color':pygame.Color('red'),
+    }
+    
     running = True
-
-
     
     screen.blit(BackGround.image, BackGround.rect)
 
     triangel(-50, -600)
     triangel(50, 600)
+    
+    btn1 = Button((50,50,50,50), print, btn_settings)
 
     while running == True:
         
@@ -143,7 +152,7 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
-
+            
         pygame.display.update()
     
 
