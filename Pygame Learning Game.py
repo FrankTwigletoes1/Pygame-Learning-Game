@@ -23,51 +23,6 @@ class Background(pygame.sprite.Sprite):
         self.rect.left, self.rect.top = location
         
  
-class Button:
-    def __init__(self, rect, command, **kwargs):
-        self.process_kwargs(kwargs)
-        self.rect = pg.Rect(rect)
-        self.image = pg.Surface(self.rect.size).convert()
-        self.function = command
-        self.text = self.font.render(self.text,True,self.font_color)
-        self.text_rect = self.text.get_rect(center=self.rect.center)
-         
-    def process_kwargs(self, kwargs):
-        settings = {
-            'color'         :pg.Color('red'),
-            'text'          :'default',
-            'font'          :pg.font.SysFont('Arial', 16),
-            'hover_color'   :(200,0,0),
-            'font_color'    :pg.Color('white'),
-        }
-        for kwarg in kwargs:
-            if kwarg in settings:
-                settings[kwarg] = kwargs[kwarg]
-            else:
-                raise AttributeError("{} has no keyword: {}".format(self.__class__.__name__, kwarg))
-        self.__dict__.update(settings)
- 
-    def get_event(self):
-        if event.type == pg.MOUSEBUTTONDOWN and event.button == 1:
-            self.on_click()
- 
-    def on_click(self):
-        if self.is_hovering():
-            self.function()
-             
-    def is_hovering(self):
-        if self.rect.collidepoint(pg.mouse.get_pos()):
-            return True
- 
-    def draw(self, surf):
-        if self.is_hovering():
-            self.image.fill(self.hover_color)
-        else:
-            self.image.fill(self.color)
-        surf.blit(self.image, self.rect)
-        surf.blit(self.text, self.text_rect)
-    
-        
 
 class Player():
     def __init__(self, x_pos, y_pos, w, h):
@@ -77,14 +32,13 @@ class Player():
         self.h = h
         self.color = (255,0,0)
     
-    def move(self, direction, steps):
-        if direction == right:
-            print("right", self.x," ", self.y)
-            self.x += 10
+    def move_right(self, steps):
+        self.x += 10
+        print("right", self.x," ", self.y)
 
-        elif direction == up:
-            print("up",self.x ," ", self.y)
-            self.y += 10
+    def move_up(self, steps):
+        self.y += 10
+        print("up",self.x ," ", self.y)
 
 #Classes slut
 
@@ -94,6 +48,7 @@ screenheight=800
 green = (0,255,0)#faven gÃ¸rn
 red = (255,0,0)#farven rÃ¸d
 
+pl_1=Player()
 #Load billede og sÃ¦t baggrund
 BackGround = Background('background.png',screenwidth,screenheight, [0,0])
 screen = pygame.display.set_mode((screenwidth,screenheight))
@@ -112,10 +67,7 @@ def triangel(Xspacer_1, Xspacer_2):
         pygame.draw.rect(screen,red,((screenwidth/2+Xspacer_1-40),460, 40, 40))
     else:
         pygame.draw.rect(screen,red,((screenwidth/2+Xspacer_1),460, 40, 40))
-   
-def print():
-    x += 1
-    print("text", x)
+
 
 def main():
     global Background
@@ -125,11 +77,7 @@ def main():
     global green
     global red
     
-    btn_settings = {
-    'text':'Try me bitch',
-    'color':pygame.Color('grey'),
-    'font_color':pygame.Color('red'),
-    }
+   Selection = "SeleOne"
     
     running = True
     
@@ -138,7 +86,6 @@ def main():
     triangel(-50, -600)
     triangel(50, 600)
     
-    btn1 = Button((50,50,50,50), print, btn_settings)
 
     while running == True:
         
@@ -148,10 +95,41 @@ def main():
                 pygame.quit()
                 quit()
 
-            elif event.type == pygame.KEYDOWN:
+            if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT:
+                    if Selection == "SeleOne":
+                        print("+1 on ", Selection)
+                        Selection = "SeleTwo"
+                    elif Selection == "SeleTwo":
+                        print("+1 on ", Selection)
+                        Selection = "SeleThree"
+                    elif Selection == "SeleThree":
+                        print("+1 on ", Selection)
+                        Selection = "SeleFour"
+                    elif Selection == "SeleFour":
+                        print("+1 on ", Selection)
+                        Selection = "Seleone"
+
+
+                if event.key == pygame.K_RIGHT:
+                    if Selection == "SeleOne":
+                        print("-1 on ", Selection)
+                        Selection = "SeleFour"
+                    elif Selection == "SeleFour":
+                        print("-1 on ", Selection)
+                        Selection = "SeleThree"
+                    elif Selection == "SeleThree":
+                        print("-1 on ", Selection)
+                        Selection = "SeleTwo"
+                    elif Selection == "SeleTwo":
+                        print("-1 on ", Selection)
+                        Selection = "SeleOne"
+
+                
             
         pygame.display.update()
     
