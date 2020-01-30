@@ -1,8 +1,36 @@
+"""
+import random as r
+
+
+
+def generate():
+    selector = 1
+    
+    l = []
+    SelectorRange = r.randrange(3,5)
+    if selector == 1:
+        print("Selected Plus")
+        for each in range(2, SelectorRange):
+            l.append(each)
+            l.append("+")
+            print(l)
+        answer = ''.join(l)
+        
+    if selector == 2:
+        print("selected minus")
+
+    if selector == 3:
+        print("selected multiply")
+        
+
+"""
+
 #Imports
 import time
 import os, sys
 import pygame
 from pygame.locals import *
+import random as r
 
 pygame.init()
 
@@ -30,6 +58,17 @@ class DrawButton:
         self.h = h
         self.btnColor = btnColor
 
+class generateMathProblem:
+    def generate():
+        selector = r.randrange(1,3)
+        if selector == 1:
+            print("Selected Plus")
+            
+        if selector == 2:
+            print("selected minus")
+
+        if selector == 3:
+            print("selected multiply")
 
 
 class Player():
@@ -53,11 +92,11 @@ class Player():
 #Variabler
 screenwidth=1500
 screenheight=800
-green = (0,255,0)#faven gÃ¸rn
-red = (255,0,0)#farven rÃ¸d
+green = (0,255,0)#faven goern
+red = (255,0,0)#farven raad
 
 
-#Load billede og sÃ¦t baggrund
+#Load billede og saet baggrund
 BackGround = Background('background.png',screenwidth,screenheight, [0,0])
 screen = pygame.display.set_mode((screenwidth,screenheight))
 
