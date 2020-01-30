@@ -22,7 +22,15 @@ class Background(pygame.sprite.Sprite):
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
         
- 
+class DrawButton:
+    def __init__(self, x, y, w, h, btnColor):
+        self.x = x
+        self.y = y
+        self.w = w
+        self.h = h
+        self.btnColor = btnColor
+
+
 
 class Player():
     def __init__(self, x_pos, y_pos, w, h):
@@ -48,7 +56,7 @@ screenheight=800
 green = (0,255,0)#faven gÃ¸rn
 red = (255,0,0)#farven rÃ¸d
 
-pl_1=Player()
+
 #Load billede og sÃ¦t baggrund
 BackGround = Background('background.png',screenwidth,screenheight, [0,0])
 screen = pygame.display.set_mode((screenwidth,screenheight))
@@ -77,7 +85,7 @@ def main():
     global green
     global red
     
-   Selection = "SeleOne"
+    Selection = "SeleOne"
     
     running = True
     
@@ -102,21 +110,6 @@ def main():
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     if Selection == "SeleOne":
-                        print("+1 on ", Selection)
-                        Selection = "SeleTwo"
-                    elif Selection == "SeleTwo":
-                        print("+1 on ", Selection)
-                        Selection = "SeleThree"
-                    elif Selection == "SeleThree":
-                        print("+1 on ", Selection)
-                        Selection = "SeleFour"
-                    elif Selection == "SeleFour":
-                        print("+1 on ", Selection)
-                        Selection = "Seleone"
-
-
-                if event.key == pygame.K_RIGHT:
-                    if Selection == "SeleOne":
                         print("-1 on ", Selection)
                         Selection = "SeleFour"
                     elif Selection == "SeleFour":
@@ -128,8 +121,34 @@ def main():
                     elif Selection == "SeleTwo":
                         print("-1 on ", Selection)
                         Selection = "SeleOne"
-
+                    print(Selection)
                 
+
+                if event.key == pygame.K_RIGHT:
+                    if Selection == "SeleOne":
+                        print("+1 on ", Selection)
+                        Selection = "SeleTwo"
+                    elif Selection == "SeleTwo":
+                        print("+1 on ", Selection)
+                        Selection = "SeleThree"
+                    elif Selection == "SeleThree":
+                        print("+1 on ", Selection)
+                        Selection = "SeleFour"
+                    elif Selection == "SeleFour":
+                        print("+1 on ", Selection)
+                        Selection = "SeleOne"
+                    print(Selection)
+                
+                if event.key == pygame.K_RETURN:
+                    if Selection == "SeleOne":
+                        Pl1Answer = "SeleOne"
+                    if Selection == "SeleTwo":
+                        Pl1Answer = "SeleTwo"
+                    if Selection == "SeleThree":
+                        Pl1Answer = "SeleThree"
+                    if Selection == "SeleFour":
+                        Pl1Answer = "SeleFour"
+                    
             
         pygame.display.update()
     
