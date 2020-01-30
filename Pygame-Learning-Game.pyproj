@@ -22,6 +22,9 @@
     <Content Include="Background.png" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logic.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Pygame Learning Game.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
