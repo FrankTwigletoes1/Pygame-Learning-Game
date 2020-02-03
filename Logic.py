@@ -1,12 +1,6 @@
 import time
-import os, sys
 import pygame
-from pygame.locals import *
 import random as r
-#Check
-if not pygame.font: 
-    print('Fonts blev ikke importeret')
-
 
 
 #Variabler
@@ -33,23 +27,26 @@ class DrawButton:
         self.h = h
         self.btnColor = btnColor
 
-#class Math:
-#    def generate(self, LowestValue, highestValue, Lenght):
-#        selector = r.randrange(1,3)
-#        x = r.randrange(2,Length)
-#        answer = []
-#        
-#        if selector == 1:
-#            print("plus")
-#            for each in range(1,x):
-#                num = r.randint()
-#        elif selector == 2:
-#            print("minus")
-#        elif selector == 3:
-#            print("multiply")
-#    
-#    def Confirm(self, test="hallo"):
-#        print(test)
+class Math:
+    def generate(self, LowestValue, highestValue, Lenght):
+        selector = r.randrange(1,3)
+        x = r.randrange(2,Length)
+        l = []
+        
+        if selector == 1:
+            print("plus")
+            for each in range(1,x):
+                num = r.randint(LowestValue,highestValue)
+                l.append(num)
+                l.append('+')
+                s = ''.join(l)
+        elif selector == 2:
+            print("minus")
+        elif selector == 3:
+            print("multiply")
+    
+    def Confirm(self, test="hallo"):
+        print(test)
 
 
 class Player():
@@ -70,7 +67,6 @@ class Player():
 
 
 BackGround = Background('background.png',screenwidth,screenheight, [0,0])
-
 screen = pygame.display.set_mode((screenwidth,screenheight))
 
 class triangle:

@@ -1,8 +1,6 @@
 #Imports
 import time
-import os, sys
 import pygame
-from pygame.locals import *
 import random as r
 from Logic import *
 pygame.init()
@@ -16,8 +14,6 @@ def main():
     global green
     global red
     
-    
-
     
     Selection = "SeleOne"
     
@@ -41,6 +37,7 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_LEFT:
                     if Selection == "SeleOne":
