@@ -3,11 +3,36 @@ import pygame
 import random as r
 
 
+ 
+
 #Variabler
 screenwidth=1500
 screenheight=800
 green = (0,255,0)
 red = (255,0,0)
+lightblue = (0,191,255)
+
+#x_centered = screenwidth / 2 - imagewidth / 2
+#y_centered = screenheight / 2 - imageheight / 2
+
+
+class button:
+    def btn(msg,x,y,w,h,iColor,aColor, funk=None):
+        mousepos = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
+        if x+w > mousepos[0] > x and y+h > mousepos[1] > y:
+            pygame.draw.rect(gameDisplay, aColor,(x,y,w,h))
+            if click[0] == 1 and funk != None:
+                print("clicked ", click)
+                funk()
+        else:
+            pygame.draw.rect(gameDisplay, iColor,(x,y,w,h))
+
+        smallText = pygame.font.Font("bitstreamverasans",20)
+        textSurf, textRect = text_objects(msg, smallText)
+        textRect.center = ( (x+(w/2)), (y+(h/2)) )
+        gameDisplay.blit(textSurf, textRect)
 
 
 #Classes
@@ -18,35 +43,61 @@ class Background(pygame.sprite.Sprite):
         self.image = pygame.transform.scale(self.image, (screenwidth,screenheight))
         self.rect = self.image.get_rect()
         self.rect.left, self.rect.top = location
+
+BackGround = Background('background.png',screenwidth,screenheight, [0,0])
+screen = pygame.display.set_mode((screenwidth,screenheight))
+  
         
-class DrawButton:
-    def __init__(self, x, y, w, h, btnColor):
-        self.x = x
-        self.y = y
-        self.w = w
-        self.h = h
-        self.btnColor = btnColor
+class button:
+    def text_objects(text, font):
+        textSurface = font.render(text, True, (0,0,0))
+        return textSurface, textSurface.get_rect()
+
+    def btn(msg,x,y,w,h,iColor,aColor, funk=None):
+        mousepos = pygame.mouse.get_pos()
+        click = pygame.mouse.get_pressed()
+
+        if x+w > mousepos[0] > x and y+h > mousepos[1] > y:
+            pygame.draw.rect(screen, aColor,(x,y,w,h))
+            if click[0] == 1 and funk != None:
+                print("clicked ", click)
+                funk()
+        else:
+            pygame.draw.rect(screen, iColor,(x,y,w,h))
+
+        smallText = pygame.font.SysFont("bitstreamverasans",20)
+        textSurf, textRect = button.text_objects(msg, smallText)
+        textRect.center = ( (x+(w/2)), (y+(h/2)) )
+        screen.blit(textSurf, textRect)
+
+ 
 
 class Math:
-    def generate(self, LowestValue, highestValue, Lenght):
-        selector = r.randrange(1,3)
-        x = r.randrange(2,Length)
-        l = []
+    def generateQuestion(LowestValue, highestValue):
+        global question
+        global answer
+
+        num1 = r.randint(LowestValue, highestValue)
+        num2 = r.randint(LowestValue, highestValue)
+        selector = r.randint(1,3)
         
         if selector == 1:
             print("plus")
-            for each in range(1,x):
-                num = r.randint(LowestValue,highestValue)
-                l.append(num)
-                l.append('+')
-                s = ''.join(l)
-        elif selector == 2:
+            question = ("Hvad er " + str(num1) +  " + " + str(num2))
+            answer = num1 + num2
+
+        if selector == 2:
             print("minus")
-        elif selector == 3:
-            print("multiply")
-    
-    def Confirm(self, test="hallo"):
-        print(test)
+            question = ("Hvad er " + str(num1) +  " - " + str(num2))
+            answer = num1 - num2
+
+        if selector == 3:
+            print("gange")
+            question = ("Hvad er " + str(num1) +  " * " + str(num2))
+            answer = num1 * num2
+        return(answer)
+        
+            
 
 
 class Player():
@@ -65,9 +116,6 @@ class Player():
         self.y += 10
         print("up",self.x ," ", self.y)
 
-
-BackGround = Background('background.png',screenwidth,screenheight, [0,0])
-screen = pygame.display.set_mode((screenwidth,screenheight))
 
 class triangle:
     def __init__(self, Xspacer_1, Xspacer_2):
