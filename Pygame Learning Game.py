@@ -6,7 +6,7 @@ from Logic import *
 pygame.init()
 
 
-def main():
+def main(alreadyGenerated=False):
     global Background
     global screen
     global screenwidth
@@ -17,17 +17,11 @@ def main():
     global question
     
     
-    Selection = "SeleOne"
     
     running = True
     
     screen.blit(BackGround.image, BackGround.rect)
 
-    pygame.draw.rect(screen, lightblue,(screenwidth / 2 - 100 / 2, screenheight / 2 - 100 / 2+200, 100,100))
-    pygame.draw.rect(screen, lightblue,(screenwidth / 2 - 100 / 2 + 105, screenheight / 2 - 100 / 2+200, 100,100))
-    pygame.draw.rect(screen, lightblue,(screenwidth / 2 - 100 / 2 - 105, screenheight / 2 - 100 / 2+200, 100,100))
-    pygame.draw.rect(screen, lightblue,(screenwidth / 2 - 100 / 2 + 210, screenheight / 2 - 100 / 2+200, 100,100))
-    pygame.draw.rect(screen, lightblue,(screenwidth / 2 - 100 / 2 - 210, screenheight / 2 - 100 / 2+200, 100,100))
     
     triangle(-50, -600)
     triangle(50, 600)
@@ -46,28 +40,41 @@ def main():
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
-        
-        def check():
-            print("check")
-
-        answer =  Math.generateQuestion(1,10)
-        select = r.randint(1,5)
-        
         buttons = [screenwidth / 2 - 100 / 2, screenwidth / 2 - 100 / 2 + 105,screenwidth / 2 - 100 / 2 - 105, screenwidth / 2 - 100 / 2 + 210,screenwidth / 2 - 100 / 2 - 210] 
+        
+
+        def correct():
+            print("yes very correct")
+            alreadyGenerated = False
+        
+        if alreadyGenerated == False:
+            answer =  Math.generateQuestion(1,10)
+            buttonchoice = r.choice(buttons)
+            global buttonchoice
+            print("hallo")
+            
+        
+        
+        
         
         
         for each in buttons:
+            select = r.randint(1,5)
             if select == 1:
                 print("Indsat svar")
-                buttonchoice = r.choice(buttons)
-                button.btn("{}".format(answer),buttonchoice,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, check)
+                button.btn("{}".format(answer),buttonchoice,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, correct)
             else:
-                print("else")
-
-
+                for each in buttons:
+                    if each == buttonchoice:
+                        pass
+                    else:
+                        button.btn("{}".format(r.randint(answer-20,answer+20)),each,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, None)
+                        
+                        
+        
 
         pygame.display.update()
-    
+        
 
 
 

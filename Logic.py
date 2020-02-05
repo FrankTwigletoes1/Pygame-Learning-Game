@@ -11,28 +11,10 @@ screenheight=800
 green = (0,255,0)
 red = (255,0,0)
 lightblue = (0,191,255)
-
+question = True
 #x_centered = screenwidth / 2 - imagewidth / 2
 #y_centered = screenheight / 2 - imageheight / 2
 
-
-class button:
-    def btn(msg,x,y,w,h,iColor,aColor, funk=None):
-        mousepos = pygame.mouse.get_pos()
-        click = pygame.mouse.get_pressed()
-
-        if x+w > mousepos[0] > x and y+h > mousepos[1] > y:
-            pygame.draw.rect(gameDisplay, aColor,(x,y,w,h))
-            if click[0] == 1 and funk != None:
-                print("clicked ", click)
-                funk()
-        else:
-            pygame.draw.rect(gameDisplay, iColor,(x,y,w,h))
-
-        smallText = pygame.font.Font("bitstreamverasans",20)
-        textSurf, textRect = text_objects(msg, smallText)
-        textRect.center = ( (x+(w/2)), (y+(h/2)) )
-        gameDisplay.blit(textSurf, textRect)
 
 
 #Classes
@@ -95,6 +77,7 @@ class Math:
             print("gange")
             question = ("Hvad er " + str(num1) +  " * " + str(num2))
             answer = num1 * num2
+        print(answer)
         return(answer)
         
             
