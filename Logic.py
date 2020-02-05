@@ -10,7 +10,8 @@ screenwidth=1500
 screenheight=800
 green = (0,255,0)
 red = (255,0,0)
-lightblue = (0,191,255)
+lightblue = (0,162,232)
+darkblue = (21,21,255)
 question = True
 #x_centered = screenwidth / 2 - imagewidth / 2
 #y_centered = screenheight / 2 - imageheight / 2
@@ -84,20 +85,38 @@ class Math:
 
 
 class Player():
-    def __init__(self, x_pos, y_pos, w, h):
-        self.x = x_pos
-        self.y = y_pos
-        self.w = w
-        self.h = h
-        self.color = (255,0,0)
-    
-    def move_right(self, steps):
-        self.x += 10
-        print("right", self.x," ", self.y)
+    def __init__(self, x_pos, y_pos, color):
+        global BackGround
+        global screen
+        global screenwidth
+        global screenheight
+        global green
+        global red
+        self.x_pos = x_pos
+        self.y_pos = y_pos
+        pygame.draw.rect(screen, color,(self.x_pos, self.y_pos, 50, 50))
 
-    def move_up(self, steps):
-        self.y += 10
-        print("up",self.x ," ", self.y)
+    def move(self, steps):
+
+        if self.y_pos <= 100:
+            print("Du vandt")
+
+        elif self.x_pos == screenwidth/2+50 or self.x_pos == screenwidth/2-100:
+            self.y_pos += -10
+            print("up",self.x_pos ," ", self.y_pos)
+
+        elif self.x_pos < screenwidth/2:
+            self.x_pos += 10
+            print("right", self.x_pos," ", self.y_pos)
+
+        elif self.x_pos > screenwidth/2:
+            self.x_pos += -10
+            print("right", self.x_pos," ", self.y_pos)
+
+        else:
+            print("error")
+
+    
 
 
 class triangle:
@@ -108,9 +127,13 @@ class triangle:
         global screenheight
         global green
         global red
-    
-        pygame.draw.polygon(screen, green, (((screenwidth/2)+Xspacer_1,100),((screenwidth/2)+Xspacer_1,500),((screenwidth/2)+Xspacer_2,500)))
+        global lightblue
+
+
+        pygame.draw.polygon(screen,  lightblue, (((screenwidth/2)+Xspacer_1,100),((screenwidth/2)+Xspacer_1,500),((screenwidth/2)+Xspacer_2,500)))
         if Xspacer_1 < 0:
-            pygame.draw.rect(screen,red,((screenwidth/2+Xspacer_1-40),460, 40, 40))
+            pygame.draw.rect(screen,darkblue,((screenwidth/2+Xspacer_1-40),460, 40, 40))
         else:
-            pygame.draw.rect(screen,red,((screenwidth/2+Xspacer_1),460, 40, 40))
+            pygame.draw.rect(screen,darkblue,((screenwidth/2+Xspacer_1),460, 40, 40))
+        #triangle_1(-50, -600)
+        #triangle_2(50, 650)

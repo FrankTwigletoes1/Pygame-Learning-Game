@@ -24,9 +24,11 @@ def main(alreadyGenerated=False):
 
     
     triangle(-50, -600)
-    triangle(50, 600)
-    
+    triangle(50, 650)
 
+    Player_1 = Player((screenwidth/2-600), 450, red)
+    Player_2 = Player((screenwidth/2+600), 450, green)
+    
     while running == True:
         
 
@@ -40,36 +42,42 @@ def main(alreadyGenerated=False):
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
                     quit()
+
+                elif event.key == pygame.K_LEFT:
+                    Player_1.move(1)
+
+                elif event.key == pygame.K_RIGHT:
+                    Player_2.move(1)
+
         buttons = [screenwidth / 2 - 100 / 2, screenwidth / 2 - 100 / 2 + 105,screenwidth / 2 - 100 / 2 - 105, screenwidth / 2 - 100 / 2 + 210,screenwidth / 2 - 100 / 2 - 210] 
         
 
         def correct():
-            print("yes very correct")
-            alreadyGenerated = False
-        
-        if alreadyGenerated == False:
-            answer =  Math.generateQuestion(1,10)
-            buttonchoice = r.choice(buttons)
-            global buttonchoice
-            print("hallo")
+            pass
+            #print("yes very correct")
             
         
-        
-        
-        
+        while alreadyGenerated == False:
+            answer =  Math.generateQuestion(1,10)
+            buttonchoice = r.choice(buttons)
+            randomNums = []
+            for i in range(1,5):
+                randomNums.append(r.randint(answer-20,answer+20))
+            alreadyGenerated = True
+
         
         for each in buttons:
             select = r.randint(1,5)
             if select == 1:
-                print("Indsat svar")
+                #print("Indsat svar")
                 button.btn("{}".format(answer),buttonchoice,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, correct)
             else:
                 for each in buttons:
                     if each == buttonchoice:
                         pass
                     else:
-                        button.btn("{}".format(r.randint(answer-20,answer+20)),each,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, None)
-                        
+                        button.btn("{}".format(r.choice(randomNums)),each,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, None)
+             
                         
         
 
