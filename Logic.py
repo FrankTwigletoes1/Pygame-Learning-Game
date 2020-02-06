@@ -12,9 +12,11 @@ green = (0,255,0)
 red = (255,0,0)
 lightblue = (0,162,232)
 darkblue = (21,21,255)
+x_pos_1 = (screenwidth / 2 - 600)
+x_pos_2 = (screenwidth / 2 + 600)
+y_pos_1 = 450
+y_pos_2 = 450
 question = True
-#x_centered = screenwidth / 2 - imagewidth / 2
-#y_centered = screenheight / 2 - imageheight / 2
 
 
 
@@ -57,9 +59,6 @@ class button:
 
 class Math:
     def generateQuestion(LowestValue, highestValue):
-        global question
-        global answer
-
         num1 = r.randint(LowestValue, highestValue)
         num2 = r.randint(LowestValue, highestValue)
         selector = r.randint(1,3)
@@ -78,20 +77,10 @@ class Math:
             print("gange")
             question = ("Hvad er " + str(num1) +  " * " + str(num2))
             answer = num1 * num2
-        print(answer)
-        return(answer)
+        return answer
         
-            
-
-
 class Player():
     def __init__(self, x_pos, y_pos, color):
-        global BackGround
-        global screen
-        global screenwidth
-        global screenheight
-        global green
-        global red
         self.x_pos = x_pos
         self.y_pos = y_pos
         pygame.draw.rect(screen, color,(self.x_pos, self.y_pos, 50, 50))
@@ -116,20 +105,9 @@ class Player():
         else:
             print("error")
 
-    
-
 
 class triangle:
     def __init__(self, Xspacer_1, Xspacer_2):
-        global BackGround
-        global screen
-        global screenwidth
-        global screenheight
-        global green
-        global red
-        global lightblue
-
-
         pygame.draw.polygon(screen,  lightblue, (((screenwidth/2)+Xspacer_1,100),((screenwidth/2)+Xspacer_1,500),((screenwidth/2)+Xspacer_2,500)))
         if Xspacer_1 < 0:
             pygame.draw.rect(screen,darkblue,((screenwidth/2+Xspacer_1-40),460, 40, 40))

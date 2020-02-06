@@ -58,11 +58,11 @@ def main(alreadyGenerated=False):
             
         
         while alreadyGenerated == False:
-            answer =  Math.generateQuestion(1,10)
+            answer = Math.generateQuestion(1,10)
             buttonchoice = r.choice(buttons)
             randomNums = []
-            for i in range(1,5):
-                randomNums.append(r.randint(answer-20,answer+20))
+            for i in range(0,5):
+                randomNums.append(r.randint(answer - 20,answer + 20))
             alreadyGenerated = True
 
         
@@ -70,14 +70,13 @@ def main(alreadyGenerated=False):
             select = r.randint(1,5)
             if select == 1:
                 #print("Indsat svar")
-                button.btn("{}".format(answer),buttonchoice,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, correct)
+                button.btn("{}".format(answer),buttonchoice,screenheight / 2 - 100 / 2 + 200, 100,100,lightblue,green, correct)
             else:
-                for each in buttons:
-                    if each == buttonchoice:
-                        pass
-                    else:
-                        button.btn("{}".format(r.choice(randomNums)),each,screenheight / 2 - 100 / 2+200, 100,100,lightblue,green, None)
-             
+                if each == buttonchoice:
+                    pass
+                else:
+                    #print(randomNums)
+                    button.btn("{}".format(randomNums),each,screenheight / 2 - 100 / 2 + 200, 100,100,lightblue,green, None)
                         
         
 
