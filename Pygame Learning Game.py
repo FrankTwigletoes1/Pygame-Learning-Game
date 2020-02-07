@@ -1,3 +1,9 @@
+#Note til selv, øv dig på at bruge fucking pygame.
+#Note til selv, øv dig på at bruge fucking pygame.
+#Note til selv, øv dig på at bruge fucking pygame.
+#Note til selv, øv dig på at bruge fucking pygame.
+#Note til selv, øv dig på at bruge fucking pygame.
+#Note til selv, øv dig på at bruge fucking pygame.
 #Imports
 import time
 import pygame
@@ -76,13 +82,11 @@ def main(alreadyGenerated=False):
                     pass
                 else:
                     #print(randomNums)
-                    button.btn("{}".format(randomNums),each,screenheight / 2 - 100 / 2 + 200, 100,100,lightblue,green, None)
+                    button.btn("{}".format(r.choice(randomNums)),each,screenheight / 2 - 100 / 2 + 200, 100,100,lightblue,green, None)
                         
         
-
+# Nah fam, for ellers ville jeg ikke kunne spam skifte teksten
         pygame.display.update()
         
-
-
 
 main()

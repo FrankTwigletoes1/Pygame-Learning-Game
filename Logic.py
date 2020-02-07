@@ -96,7 +96,7 @@ class Player():
 
         elif self.x_pos < screenwidth/2:
             self.x_pos += 10
-            print("right", self.x_pos," ", self.y_pos)
+            print("left", self.x_pos," ", self.y_pos)
 
         elif self.x_pos > screenwidth/2:
             self.x_pos += -10
