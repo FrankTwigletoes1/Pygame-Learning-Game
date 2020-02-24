@@ -5,7 +5,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{40b0f111-2eaf-4ac4-bfa5-0b4f0526332e}</ProjectGuid>
     <ProjectHome />
-    <StartupFile>Pygame Learning Game.py</StartupFile>
+    <StartupFile>Pygame_Learning_Game.py</StartupFile>
     <SearchPath />
     <WorkingDirectory>.</WorkingDirectory>
     <OutputPath>.</OutputPath>
@@ -25,7 +25,7 @@
     <Compile Include="Logic.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Pygame Learning Game.py" />
+    <Compile Include="Pygame_Learning_Game.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
 </Project>

@@ -2,7 +2,6 @@ import time
 import pygame
 import random as r
 
-
  
 
 #Variabler
@@ -17,7 +16,6 @@ x_pos_2 = (screenwidth / 2 + 600)
 y_pos_1 = 450
 y_pos_2 = 450
 question = True
-
 
 
 #Classes
@@ -83,7 +81,7 @@ class Player():
     def __init__(self, x_pos, y_pos, color):
         self.x_pos = x_pos
         self.y_pos = y_pos
-        pygame.draw.rect(screen, color,(self.x_pos, self.y_pos, 50, 50))
+    
 
     def move(self, steps):
 
@@ -91,20 +89,33 @@ class Player():
             print("Du vandt")
 
         elif self.x_pos == screenwidth/2+50 or self.x_pos == screenwidth/2-100:
-            self.y_pos += -10
+            self.y_pos += -1*steps
             print("up",self.x_pos ," ", self.y_pos)
 
         elif self.x_pos < screenwidth/2:
-            self.x_pos += 10
+            self.x_pos += steps
             print("left", self.x_pos," ", self.y_pos)
 
         elif self.x_pos > screenwidth/2:
-            self.x_pos += -10
+            self.x_pos += -1*steps
             print("right", self.x_pos," ", self.y_pos)
 
         else:
             print("error")
 
+
+Player_1 = Player((screenwidth/2-600), 480, red)
+Player_2 = Player((screenwidth/2+630), 480, green)
+
+class updateScreen:
+    def update(color, color2):
+        screen.blit(BackGround.image, BackGround.rect)
+        triangle(-50, -600)
+        triangle(50, 650)
+        pygame.draw.rect(screen, color,(Player_1.x_pos, Player_1.y_pos, 20, 20))
+        pygame.draw.rect(screen, color2,(Player_2.x_pos, Player_2.y_pos, 20, 20))
+        
+        return None
 
 class triangle:
     def __init__(self, Xspacer_1, Xspacer_2):
@@ -115,3 +126,4 @@ class triangle:
             pygame.draw.rect(screen,darkblue,((screenwidth/2+Xspacer_1),460, 40, 40))
         #triangle_1(-50, -600)
         #triangle_2(50, 650)
+

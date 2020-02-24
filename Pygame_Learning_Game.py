@@ -22,38 +22,30 @@ def main(alreadyGenerated=False):
     global answer
     global question
     
-    
-    
+   
     running = True
-    
-    screen.blit(BackGround.image, BackGround.rect)
+    updateScreen.update(red, green)
 
-    
-    triangle(-50, -600)
-    triangle(50, 650)
-
-    Player_1 = Player((screenwidth/2-600), 450, red)
-    Player_2 = Player((screenwidth/2+600), 450, green)
-    
     while running == True:
         
-
         for event in pygame.event.get():
             
             if event.type == pygame.QUIT: 
                 pygame.quit()
-                quit()
+                
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     pygame.quit()
-                    quit()
+                    
 
                 elif event.key == pygame.K_LEFT:
-                    Player_1.move(1)
+                    Player_1.move(10)
+                    updateScreen.update(red,green)
 
                 elif event.key == pygame.K_RIGHT:
-                    Player_2.move(1)
+                    Player_2.move(10)
+                    updateScreen.update(red,green)
 
         buttons = [screenwidth / 2 - 100 / 2, screenwidth / 2 - 100 / 2 + 105,screenwidth / 2 - 100 / 2 - 105, screenwidth / 2 - 100 / 2 + 210,screenwidth / 2 - 100 / 2 - 210] 
         
@@ -83,8 +75,8 @@ def main(alreadyGenerated=False):
                 else:
                     #print(randomNums)
                     button.btn("{}".format(r.choice(randomNums)),each,screenheight / 2 - 100 / 2 + 200, 100,100,lightblue,green, None)
-                        
-        
+
+       
 # Nah fam, for ellers ville jeg ikke kunne spam skifte teksten
         pygame.display.update()
         
